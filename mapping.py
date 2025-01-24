@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
 
+# Example forces for each frame
+forces = [20, 40, 60, 80, 100]  # Replace with your desired force values
+
 # Function to update the colors of the circles for animation
 # force is an np row (all values 0-100)
 def update(force, heel_circle_L, left_circle_L, right_circle_L, heel_circle_R, left_circle_R, right_circle_R):
@@ -78,7 +81,11 @@ ax.grid(True)
 ax.axis('off')
 
 # Create the animation
-ani = FuncAnimation(fig, update, frames=5, fargs=(heel_circle_L, left_circle_L, right_circle_L, heel_circle_R, left_circle_R, right_circle_R), interval=1000, blit=True)
+# frames=forces means there will be 5 frames (forces array is size 5) and the input for update is forces[i]
+ani = FuncAnimation(fig, update, frames=forces, fargs=(heel_circle_L, left_circle_L, right_circle_L, heel_circle_R, left_circle_R, right_circle_R), interval=1000, blit=True)
+
+# TODO: adjust above funcAnimation. update function will instead take a 1d array as input.
+# So, the overall data will be a 2d array of size 6x(numFrames), so 6x50.
 
 # Display the plot
 plt.show()
